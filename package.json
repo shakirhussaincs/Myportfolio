@@ -1,0 +1,13 @@
+{
+  "name": "shakir-portfolio",
+  "version": "1.0.0",
+  "description": "Shakir Hussain — Personal Portfolio with 3D Background",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}

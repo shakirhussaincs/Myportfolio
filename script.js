@@ -4,11 +4,136 @@
 // ============================================
 
 // ============================================
-// 1. INITIALIZE EMAIL.JS
+// 1. INITIALIZE EMAIL.JS & THREE.JS
 // ============================================
 
 // Initialize EmailJS (Update with your public key)
 emailjs.init("YOUR_PUBLIC_KEY_HERE");
+
+// Initialize Three.js 3D Background
+const initThreeJS = () => {
+  const canvas = document.querySelector('#bg-canvas');
+  if (!canvas) return;
+
+  const scene = new THREE.Scene();
+  
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 30;
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    alpha: true,
+    antialias: true
+  });
+  
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  // Add Particles
+  const particlesGeometry = new THREE.BufferGeometry();
+  const particlesCount = 1500;
+  const posArray = new Float32Array(particlesCount * 3);
+
+  for(let i = 0; i < particlesCount * 3; i++) {
+    posArray[i] = (Math.random() - 0.5) * 100;
+  }
+
+  particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+  
+  const particlesMaterial = new THREE.PointsMaterial({
+    size: 0.15,
+    color: 0x6366f1,
+    transparent: true,
+    opacity: 0.8,
+    blending: THREE.AdditiveBlending
+  });
+
+  const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+  scene.add(particlesMesh);
+
+  // Add some floating geometric shapes
+  const shapes = [];
+  const geometry = new THREE.IcosahedronGeometry(1, 0);
+  const material = new THREE.MeshBasicMaterial({ 
+    color: 0xec4899, 
+    wireframe: true,
+    transparent: true,
+    opacity: 0.3
+  });
+
+  for(let i = 0; i < 15; i++) {
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.x = (Math.random() - 0.5) * 60;
+    mesh.position.y = (Math.random() - 0.5) * 60;
+    mesh.position.z = (Math.random() - 0.5) * 30 - 10;
+    mesh.rotation.x = Math.random() * Math.PI;
+    mesh.rotation.y = Math.random() * Math.PI;
+    
+    // Custom properties for animation
+    mesh.userData = {
+      rx: (Math.random() - 0.5) * 0.02,
+      ry: (Math.random() - 0.5) * 0.02,
+      yPosStart: mesh.position.y,
+      speed: Math.random() * 0.02 + 0.01,
+      offset: Math.random() * Math.PI * 2
+    };
+    
+    shapes.push(mesh);
+    scene.add(mesh);
+  }
+
+  // Handle Resize
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  // Handle Mouse Movement for Parallax
+  let mouseX = 0;
+  let mouseY = 0;
+  let targetX = 0;
+  let targetY = 0;
+  const windowHalfX = window.innerWidth / 2;
+  const windowHalfY = window.innerHeight / 2;
+
+  document.addEventListener('mousemove', (event) => {
+    mouseX = (event.clientX - windowHalfX);
+    mouseY = (event.clientY - windowHalfY);
+  });
+
+  // Animation Loop
+  const clock = new THREE.Clock();
+
+  const animate = () => {
+    requestAnimationFrame(animate);
+    const elapsedTime = clock.getElapsedTime();
+
+    targetX = mouseX * 0.001;
+    targetY = mouseY * 0.001;
+
+    // Rotate particle system slowly
+    particlesMesh.rotation.y += 0.001;
+    particlesMesh.rotation.x += 0.0005;
+
+    // Parallax effect on particles
+    particlesMesh.rotation.y += 0.05 * (targetX - particlesMesh.rotation.y);
+    particlesMesh.rotation.x += 0.05 * (targetY - particlesMesh.rotation.x);
+
+    // Animate shapes
+    shapes.forEach((shape) => {
+      shape.rotation.x += shape.userData.rx;
+      shape.rotation.y += shape.userData.ry;
+      shape.position.y = shape.userData.yPosStart + Math.sin(elapsedTime * shape.userData.speed + shape.userData.offset) * 2;
+    });
+
+    renderer.render(scene, camera);
+  };
+
+  animate();
+};
+
+document.addEventListener('DOMContentLoaded', initThreeJS);
 
 // ============================================
 // 2. DOM ELEMENTS
@@ -311,28 +436,7 @@ function debounce(func, delay) {
 // ============================================
 // 12. INTERSECTION OBSERVER FOR ANIMATIONS
 // ============================================
-
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-    }
-  });
-}, observerOptions);
-
-// Observe skill categories for animation
-document.querySelectorAll('.skill-category, .project-card, .timeline-content').forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(20px)';
-  el.style.transition = 'opacity 600ms ease, transform 600ms ease';
-  observer.observe(el);
-});
+// (Removed manual observer in favor of AOS for smoother animations)
 
 // ============================================
 // 13. FLOATING BADGES ANIMATION

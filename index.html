@@ -25,6 +25,9 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- 3D Background Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
   <!-- Navigation Header -->
   <nav class="navbar">
     <div class="nav-container">
@@ -91,7 +94,7 @@
         
         <div class="hero-image" data-aos="fade-left" data-aos-duration="1000">
           <div class="profile-container">
-            <img src="profile.png" alt="Shakir Hussain" class="profile-image" id="mainProfileImg">
+            <img src="shakr.jpeg" alt="Shakir Hussain" class="profile-image" id="mainProfileImg">
             <div class="profile-fallback" id="profileFallback">
               <span>SH</span>
             </div>
@@ -143,7 +146,7 @@
             </div>
           </div>
           
-          <a href="#" class="btn btn-primary download-resume">
+          <a href="cv.pdf" download="Shakir_Hussain_CV.pdf" class="btn btn-primary download-resume">
             <i class="fas fa-download"></i> Download Resume
           </a>
         </div>
@@ -553,6 +556,34 @@
             </div>
           </div>
         </div>
+
+        <!-- Full Stack Project: SIBAU Sports Website -->
+        <div class="project-card" data-category="fullstack" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+          <div class="project-image">
+            <div class="project-placeholder" style="background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%); height:180px; display:flex; align-items:center; justify-content:center;">
+              <i class="fas fa-trophy" style="font-size:3.5rem; color:rgba(255,255,255,0.9);"></i>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">SIBAU Sports Website</h3>
+            <p class="project-description">
+              Official team-based sports portal for Sukkur IBA University — featuring events, schedules, results, and team management with a fully responsive design.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">HTML</span>
+              <span class="tech-tag">CSS</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">PHP</span>
+              <span class="tech-tag">MySQL</span>
+              <span class="tech-tag">Responsive</span>
+            </div>
+            <div class="project-links">
+              <a href="https://sports.iba-suk.edu.pk/" target="_blank" rel="noopener noreferrer" class="project-link" title="Live Site">
+                <i class="fas fa-external-link-alt"></i> Live Site
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -616,6 +647,22 @@
                 </ul>
               </div>
             </div>
+
+            <div class="timeline-item">
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <h4>SIBAU Sports Website</h4>
+                <p class="role">Team-Based University Project — Sukkur IBA University</p>
+                <p class="period">2024</p>
+                <ul class="achievements">
+                  <li>Collaborated in a team to design &amp; build the official SIBAU Sports portal</li>
+                  <li>Designed fully responsive UI for sports events, results &amp; schedules</li>
+                  <li>Implemented dynamic content management for multiple sport categories</li>
+                  <li>Ensured cross-browser compatibility and mobile responsiveness</li>
+                  <li>Live: <a href="https://sports.iba-suk.edu.pk/" target="_blank" rel="noopener noreferrer" style="color:var(--primary-color);font-weight:600;">sports.iba-suk.edu.pk ↗</a></li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
         
@@ -629,7 +676,7 @@
               <div class="timeline-marker"></div>
               <div class="timeline-content">
                 <h4>Bachelor of Science in Computer Science</h4>
-                <p class="role">SIBAU University, Sukkur</p>
+                <p class="role">Sukkur IBA University (SIBAU)</p>
                 <p class="period">2023 - Present (3rd Year)</p>
                 <p>
                   Currently pursuing BS Computer Science with focus on web & mobile development. Gained hands-on experience in programming, algorithms, and software development.
@@ -755,6 +802,7 @@
   </button>
 
   <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script src="script.js"></script>
