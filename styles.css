@@ -463,7 +463,6 @@ a:hover {
 .profile-container:hover .profile-image {
   transform: scale(1.05) translateY(-5px);
 }
-}
 
 .profile-fallback {
   position: absolute;
