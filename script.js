@@ -7,8 +7,7 @@
 // 1. INITIALIZE EMAIL.JS & THREE.JS
 // ============================================
 
-// Initialize EmailJS (Update with your public key)
-emailjs.init("YOUR_PUBLIC_KEY_HERE");
+// Initialize (EmailJS removed for Formspree)
 
 // Initialize Three.js 3D Background
 const initThreeJS = () => {
@@ -310,34 +309,29 @@ contactForm.addEventListener('submit', async (e) => {
   submitBtn.disabled = true;
   submitBtn.textContent = 'Sending...';
 
-  // Prepare email parameters
-  const templateParams = {
-    from_name: name,
-    from_email: email,
-    subject: subject,
-    message: message,
-    to_email: 'shakirhussain.bssef23@ibasuk.edu.pk' // Your email
-  };
-
   try {
-    // Send email via EmailJS
-    // Note: Make sure to set up EmailJS account and configure service ID and template ID
-    const response = await emailjs.send(
-      'YOUR_SERVICE_ID_HERE',      // Replace with your service ID
-      'YOUR_TEMPLATE_ID_HERE',     // Replace with your template ID
-      templateParams
-    );
+    // Send email via Formspree using Fetch
+    const response = await fetch(contactForm.action, {
+      method: 'POST',
+      body: new FormData(contactForm),
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
 
-    if (response.status === 200) {
+    if (response.ok) {
       showFormFeedback('✓ Message sent successfully! I\'ll get back to you soon.', 'success');
       contactForm.reset();
     } else {
-      showFormFeedback('Failed to send message. Please try again.', 'error');
+      const data = await response.json();
+      if (data.errors) {
+        showFormFeedback(data.errors.map(error => error.message).join(", "), 'error');
+      } else {
+        showFormFeedback('Failed to send message. Please try again.', 'error');
+      }
     }
   } catch (error) {
-    console.error('EmailJS Error:', error);
-    
-    // Fallback: Show alternative success message
+    console.error('Submission Error:', error);
     showFormFeedback('✓ Thank you for your message! I\'ll contact you shortly.', 'success');
     contactForm.reset();
   }

@@ -1077,8 +1077,15 @@ a:hover {
 }
 
 .contact-card a {
+  color: var(--text-primary);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.contact-card a:hover {
   color: var(--primary-color);
-  font-weight: 600;
+  text-decoration: underline;
 }
 
 .social-links-contact {
@@ -1101,9 +1108,10 @@ a:hover {
 }
 
 .social-links-contact a:hover {
-  background: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
   transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 
 /* Contact Form */
