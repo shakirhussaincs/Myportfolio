@@ -1354,205 +1354,22 @@ a:hover {
 [data-aos="fade-left"].aos-animate {
   opacity: 1;
   transform: translateX(0);
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: white;
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-}
-
-/* Contact Form */
-.contact-form {
-  background: rgba(255, 255, 255, 0.05);
-  padding: var(--spacing-lg);
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-  backdrop-filter: blur(10px);
-}
-
-.form-group {
-  margin-bottom: var(--spacing-lg);
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: var(--spacing-sm);
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  font-family: var(--font-family);
-  font-size: var(--font-size-base);
-  transition: all var(--transition-base);
-  background: rgba(0, 0, 0, 0.2);
-  color: var(--text-primary);
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  background: rgba(0, 0, 0, 0.4);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 120px;
-}
-
-.submit-btn {
-  width: 100%;
-  margin-top: var(--spacing-md);
-}
-
-.form-feedback {
-  margin-top: var(--spacing-md);
-  padding: var(--spacing-md);
-  border-radius: 8px;
-  text-align: center;
-  font-weight: 600;
-  display: none;
-}
-
-.form-feedback.success {
-  background: #d4edda;
-  color: #155724;
-  border: 2px solid #c3e6cb;
-  display: block;
-}
-
-.form-feedback.error {
-  background: #f8d7da;
-  color: #721c24;
-  border: 2px solid #f5c6cb;
-  display: block;
-}
-
-/* ============================================
-   11. FOOTER
-   ============================================ */
-
-.footer {
-  background: var(--dark-bg);
-  color: white;
-  padding: var(--spacing-lg) 0;
-  text-align: center;
-}
-
-.footer p {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.footer i {
-  color: var(--secondary-color);
-}
-
-/* ============================================
-   12. SCROLL TO TOP BUTTON
-   ============================================ */
-
-.scroll-to-top {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: white;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--font-size-lg);
-  box-shadow: var(--shadow-lg);
-  opacity: 0;
-  visibility: hidden;
-  transition: all var(--transition-base);
-  z-index: 999;
-}
-
-.scroll-to-top.visible {
-  opacity: 1;
-  visibility: visible;
-}
-
-.scroll-to-top:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-xl);
-}
-
-/* ============================================
-   13. ANIMATIONS
-   ============================================ */
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* AOS Animation Overrides - Removed manual opacity:0 to prevent blank sections if AOS is delayed */
-[data-aos="fade-up"].aos-animate {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 1s ease, transform 1s ease;
-}
-
-[data-aos="fade-right"].aos-animate {
-  opacity: 1;
-  transform: translateX(0);
-  transition: opacity 1s ease, transform 1s ease;
-}
-
-[data-aos="fade-left"].aos-animate {
-  opacity: 1;
-  transform: translateX(0);
   transition: opacity 1s ease, transform 1s ease;
 }
 
 /* ============================================
+   14. RESPONSIVE ENHANCEMENTS
+   ============================================ */
+
+@media (max-width: 1100px) {
+  .hero-content, .about-content, .experience-content, .contact-content {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 7rem 1rem 4.5rem;
+  }
+
    14. UNIFIED RESPONSIVE DESIGN
    ============================================ */
 
