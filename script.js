@@ -310,16 +310,24 @@ contactForm.addEventListener('submit', async (e) => {
   submitBtn.textContent = 'Sending...';
 
   try {
-    // Send email via Formspree using Fetch
+    // Send email via Google Apps Script using Fetch
+    const formData = new FormData(contactForm);
+    const urlSearchParams = new URLSearchParams();
+    for (const pair of formData) {
+        urlSearchParams.append(pair[0], pair[1]);
+    }
+
     const response = await fetch(contactForm.action, {
       method: 'POST',
-      body: new FormData(contactForm),
+      body: urlSearchParams,
       headers: {
-        'Accept': 'application/json'
+        'Content-Type': 'application/x-www-form-urlencoded'
       }
     });
 
-    if (response.ok) {
+    const result = await response.json();
+
+    if (result.result === 'success') {
       showFormFeedback('✓ Message sent successfully! I\'ll get back to you soon.', 'success');
       contactForm.reset();
     } else {
