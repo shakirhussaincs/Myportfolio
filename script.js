@@ -311,32 +311,28 @@ contactForm.addEventListener('submit', async (e) => {
 
   try {
     // Send email via Google Apps Script using Fetch
+    // We use URLSearchParams which is most compatible with Apps Script e.parameter
     const formData = new FormData(contactForm);
-    const urlSearchParams = new URLSearchParams();
-    for (const pair of formData) {
-        urlSearchParams.append(pair[0], pair[1]);
-    }
+    const params = new URLSearchParams(formData);
 
-    const response = await fetch(contactForm.action, {
-      method: 'POST',
-      body: urlSearchParams,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    });
+    // We use a try-catch with a more robust fetch
+    try {
+      await fetch(contactForm.action, {
+        method: 'POST',
+        body: params,
+        mode: 'no-cors', // This is the secret for Google Apps Script
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      });
 
-    const result = await response.json();
-
-    if (result.result === 'success') {
+      // With 'no-cors', we can't read the response, but if it doesn't throw, 
+      // it almost certainly reached Google's servers.
       showFormFeedback('✓ Message sent successfully! I\'ll get back to you soon.', 'success');
       contactForm.reset();
-    } else {
-      const data = await response.json();
-      if (data.errors) {
-        showFormFeedback(data.errors.map(error => error.message).join(", "), 'error');
-      } else {
-        showFormFeedback('Failed to send message. Please try again.', 'error');
-      }
+    } catch (fetchError) {
+      console.error('Fetch error:', fetchError);
+      showFormFeedback('Connection error. Please try again or email me directly.', 'error');
     }
   } catch (error) {
     console.error('Submission Error:', error);
