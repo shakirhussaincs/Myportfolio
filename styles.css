@@ -1357,19 +1357,8 @@ a:hover {
   transition: opacity 1s ease, transform 1s ease;
 }
 
+
 /* ============================================
-   14. RESPONSIVE ENHANCEMENTS
-   ============================================ */
-
-@media (max-width: 1100px) {
-  .hero-content, .about-content, .experience-content, .contact-content {
-    grid-template-columns: 1fr;
-  }
-
-  .hero {
-    padding: 7rem 1rem 4.5rem;
-  }
-
    14. UNIFIED RESPONSIVE DESIGN
    ============================================ */
 
