@@ -658,6 +658,11 @@ window.addEventListener('load', () => {
   if (heroContent) {
     heroContent.style.opacity = '1';
   }
+
+  // Refresh AOS to ensure all sections are detected correctly
+  if (typeof AOS !== 'undefined') {
+    AOS.refresh();
+  }
 });
 
 // ============================================

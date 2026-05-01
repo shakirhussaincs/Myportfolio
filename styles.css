@@ -1279,32 +1279,17 @@ a:hover {
   }
 }
 
-/* AOS Animation Overrides */
-[data-aos="fade-up"] {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
+/* AOS Animation Overrides - Removed manual opacity:0 to prevent blank sections if AOS is delayed */
 [data-aos="fade-up"].aos-animate {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 1s ease, transform 1s ease;
 }
 
-[data-aos="fade-right"] {
-  opacity: 0;
-  transform: translateX(-30px);
-}
-
 [data-aos="fade-right"].aos-animate {
   opacity: 1;
   transform: translateX(0);
   transition: opacity 1s ease, transform 1s ease;
-}
-
-[data-aos="fade-left"] {
-  opacity: 0;
-  transform: translateX(30px);
 }
 
 [data-aos="fade-left"].aos-animate {
