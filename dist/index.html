@@ -1,15 +1,810 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shakir Hussain | 3D Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script type="module" crossorigin src="/assets/index-CxIIDEc9.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BJU8uzqg.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shakir Hussain - Full Stack Developer & AI/ML Enthusiast. Building intelligent digital solutions with modern technologies.">
+  <meta name="keywords" content="Developer, Portfolio, Web Development, Flutter, React, Node.js, AI/ML">
+  <meta name="author" content="Shakir Hussain">
+  
+  <title>Shakir Hussain | Full Stack Developer & AI/ML Enthusiast</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%236366f1' width='100' height='100'/><text x='50' y='75' font-size='60' font-weight='bold' fill='white' text-anchor='middle'>SH</text></svg>">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- AOS Animation Library -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <script type="module" crossorigin src="/assets/index-B5cTweGa.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CWl7bYDB.css">
+</head>
+<body>
+  <!-- 3D Background Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Navigation Header -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="#home" class="logo">SH</a>
+        <span class="brand-text">Shakir Hussain</span>
+      </div>
+      
+      <div class="nav-menu" id="navMenu">
+        <a href="#home" class="nav-link active" data-section="home">Home</a>
+        <a href="#about" class="nav-link" data-section="about">About</a>
+        <a href="#skills" class="nav-link" data-section="skills">Skills</a>
+        <a href="#projects" class="nav-link" data-section="projects">Projects</a>
+        <a href="#experience" class="nav-link" data-section="experience">Experience</a>
+        <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+      </div>
+      
+      <button class="nav-toggle" id="navToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+        <div class="hero-text">
+          <p class="hero-label">Welcome to my portfolio</p>
+          <h1 class="hero-title">
+            Full Stack Developer <span class="highlight">&</span> 
+            <br>AI/ML Enthusiast
+          </h1>
+          <p class="hero-subtitle">
+            I build intelligent digital solutions using modern technologies. Specialized in web & mobile development with a passion for creating seamless user experiences.
+          </p>
+          
+          <div class="hero-cta">
+            <a href="#contact" class="btn btn-primary">
+              <i class="fas fa-envelope"></i> Get In Touch
+            </a>
+            <a href="#projects" class="btn btn-secondary">
+              <i class="fas fa-briefcase"></i> View My Work
+            </a>
+          </div>
+          
+          <div class="hero-socials">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/shakir-hussain" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-link" title="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="hero-image" data-aos="fade-left" data-aos-duration="1000">
+          <div class="profile-container">
+            <img src="/assets/shakr-BedIBYKt.jpeg" alt="Shakir Hussain" class="profile-image" id="mainProfileImg">
+            <div class="profile-fallback" id="profileFallback">
+              <span>SH</span>
+            </div>
+            <div class="floating-badge badge-1">
+              <i class="fas fa-code"></i>
+              <span>Web Dev</span>
+            </div>
+            <div class="floating-badge badge-2">
+              <i class="fas fa-brain"></i>
+              <span>AI/ML</span>
+            </div>
+            <div class="floating-badge badge-3">
+              <i class="fas fa-mobile-alt"></i>
+              <span>Mobile</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section section-light">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      
+      <div class="about-content">
+        <div class="about-text" data-aos="fade-right" data-aos-duration="1000">
+          <p>
+            I'm a <strong>motivated 3rd-year Computer Science student</strong> with a strong focus on full-stack web and mobile application development. With hands-on experience building dynamic websites, portfolios, and complete management systems, I transform ideas into functional, beautiful digital products.
+          </p>
+          
+          <p>
+            My expertise spans <strong>frontend technologies</strong> (React, JavaScript, HTML/CSS), <strong>backend development</strong> (Node.js, Express, MongoDB), <strong>mobile apps</strong> (Flutter, Dart), and <strong>AI/ML solutions</strong>. I'm passionate about solving complex problems and creating user-centric applications.
+          </p>
+          
+          <div class="about-stats">
+            <div class="stat-item">
+              <h3>15+</h3>
+              <p>Certifications</p>
+            </div>
+            <div class="stat-item">
+              <h3>50+</h3>
+              <p>Projects</p>
+            </div>
+            <div class="stat-item">
+              <h3>30+</h3>
+              <p>Happy Clients</p>
+            </div>
+          </div>
+          
+          <a href="cv.pdf" download="Shakir_Hussain_CV.pdf" class="btn btn-primary download-resume">
+            <i class="fas fa-download"></i> Download Resume
+          </a>
+        </div>
+        
+        <div class="about-highlights" data-aos="fade-left" data-aos-duration="1000">
+          <div class="highlight-card">
+            <i class="fas fa-lightbulb"></i>
+            <h3>Problem Solver</h3>
+            <p>Tackle complex challenges with creative and efficient solutions</p>
+          </div>
+          
+          <div class="highlight-card">
+            <i class="fas fa-rocket"></i>
+            <h3>Fast Learner</h3>
+            <p>Quickly master new technologies and adapt to emerging trends</p>
+          </div>
+          
+          <div class="highlight-card">
+            <i class="fas fa-handshake"></i>
+            <h3>Team Player</h3>
+            <p>Collaborate effectively to deliver excellence in every project</p>
+          </div>
+          
+          <div class="highlight-card">
+            <i class="fas fa-star"></i>
+            <h3>Quality Focused</h3>
+            <p>Deliver polished, production-ready code and designs</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="section section-dark">
+    <div class="container">
+      <h2 class="section-title">Technical Skills</h2>
+      
+      <div class="skills-grid">
+        <!-- Frontend -->
+        <div class="skill-category" data-aos="fade-up" data-aos-duration="800">
+          <div class="category-icon frontend">
+            <i class="fas fa-palette"></i>
+          </div>
+          <h3>Frontend</h3>
+          <ul class="skills-list">
+            <li><span class="skill-tag">HTML/CSS</span> <span class="level">90%</span></li>
+            <li><span class="skill-tag">JavaScript (ES6+)</span> <span class="level">82%</span></li>
+            <li><span class="skill-tag">React.js</span> <span class="level">74%</span></li>
+            <li><span class="skill-tag">UI/UX Design</span> <span class="level">80%</span></li>
+            <li><span class="skill-tag">Responsive Design</span> <span class="level">95%</span></li>
+          </ul>
+        </div>
+        
+        <!-- Backend -->
+        <div class="skill-category" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+          <div class="category-icon backend">
+            <i class="fas fa-server"></i>
+          </div>
+          <h3>Backend</h3>
+          <ul class="skills-list">
+            <li><span class="skill-tag">Node.js & Express</span> <span class="level">71%</span></li>
+            <li><span class="skill-tag">MongoDB</span> <span class="level">90%</span></li>
+            <li><span class="skill-tag">RESTful APIs</span> <span class="level">79%</span></li>
+            <li><span class="skill-tag">Firebase</span> <span class="level">85%</span></li>
+            <li><span class="skill-tag">Database Design</span> <span class="level">78%</span></li>
+          </ul>
+        </div>
+        
+        <!-- Mobile -->
+        <div class="skill-category" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+          <div class="category-icon mobile">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3>Mobile Dev</h3>
+          <ul class="skills-list">
+            <li><span class="skill-tag">Flutter</span> <span class="level">75%</span></li>
+            <li><span class="skill-tag">Dart</span> <span class="level">80%</span></li>
+            <li><span class="skill-tag">Cross-Platform</span> <span class="level">82%</span></li>
+            <li><span class="skill-tag">Mobile UI/UX</span> <span class="level">85%</span></li>
+          </ul>
+        </div>
+        
+        <!-- AI/ML -->
+        <div class="skill-category" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+          <div class="category-icon aiml">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3>AI & ML</h3>
+          <ul class="skills-list">
+            <li><span class="skill-tag">Machine Learning</span> <span class="level">78%</span></li>
+            <li><span class="skill-tag">Deep Learning</span> <span class="level">91%</span></li>
+            <li><span class="skill-tag">Python</span> <span class="level">75%</span></li>
+            <li><span class="skill-tag">Data Analysis</span> <span class="level">72%</span></li>
+          </ul>
+        </div>
+        
+        <!-- Tools -->
+        <div class="skill-category" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+          <div class="category-icon tools">
+            <i class="fas fa-tools"></i>
+          </div>
+          <h3>Tools & Methods</h3>
+          <ul class="skills-list">
+            <li><span class="skill-tag">Git & GitHub</span> <span class="level">93%</span></li>
+            <li><span class="skill-tag">Linux</span> <span class="level">80%</span></li>
+            <li><span class="skill-tag">VS Code</span> <span class="level">95%</span></li>
+            <li><span class="skill-tag">Agile/Scrum</span> <span class="level">75%</span></li>
+          </ul>
+        </div>
+        
+        <!-- Soft Skills -->
+        <div class="skill-category" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
+          <div class="category-icon soft">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>Soft Skills</h3>
+          <ul class="skills-list">
+            <li><span class="skill-tag">Communication</span> <span class="level">90%</span></li>
+            <li><span class="skill-tag">Problem Solving</span> <span class="level">92%</span></li>
+            <li><span class="skill-tag">Leadership</span> <span class="level">85%</span></li>
+            <li><span class="skill-tag">Project Management</span> <span class="level">80%</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section section-light">
+    <div class="container">
+      <h2 class="section-title">Featured Projects</h2>
+      
+      <div class="projects-filter">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="frontend">Frontend</button>
+        <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+        <button class="filter-btn" data-filter="mobile">Mobile</button>
+        <button class="filter-btn" data-filter="aiml">AI/ML</button>
+      </div>
+      
+      <div class="projects-grid">
+        <!-- Mobile Project: BeeCamper -->
+        <div class="project-card" data-category="mobile" data-aos="fade-up" data-aos-duration="800">
+          <div class="project-image">
+            <div class="placeholder-image" style="background: linear-gradient(135deg, #2ebf91 0%, #0f4c81 100%);">
+              <i class="fas fa-camping"></i>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">BeeCamper</h3>
+            <p class="project-description">
+              Mobile camping booking and trip planning app built with Flutter and Dart, providing seamless location discovery and reservation workflow.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">Flutter</span>
+              <span class="tech-tag">Dart</span>
+              <span class="tech-tag">Firebase</span>
+              <span class="tech-tag">REST API</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/shakirhussaincs/mybike" target="_blank" class="project-link" title="View Code">
+                <i class="fab fa-github"></i> Code
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Project: The Rider -->
+        <div class="project-card" data-category="mobile" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+          <div class="project-image">
+            <div class="placeholder-image" style="background: linear-gradient(135deg, #f8b500 0%, #c02425 100%);">
+              <i class="fas fa-motorcycle"></i>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">The Rider</h3>
+            <p class="project-description">
+              Cross-platform rider service app with live order pickup, route guidance, and status updates, built using Dart and Flutter.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">Dart</span>
+              <span class="tech-tag">Flutter</span>
+              <span class="tech-tag">Google Maps SDK</span>
+              <span class="tech-tag">Firebase Firestore</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/shakirhussaincs/The-rider" target="_blank" class="project-link" title="View Code">
+                <i class="fab fa-github"></i> Code
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI/ML Project: Wait Time Prediction Model -->
+        <div class="project-card" data-category="aiml" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+          <div class="project-image">
+            <div class="placeholder-image" style="background: linear-gradient(135deg, #5c258d 0%, #4389a2 100%);">
+              <i class="fas fa-stopwatch"></i>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Wait Time Prediction</h3>
+            <p class="project-description">
+              Predictive model with Streamlit, Python, NumPy, Pandas, scikit-learn, and XGBoost to estimate customer wait times and reduce service delays.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">Streamlit</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">NumPy</span>
+              <span class="tech-tag">Pandas</span>
+              <span class="tech-tag">scikit-learn</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/shakirhussaincs/wait_time_prediction" target="_blank" class="project-link" title="View Code">
+                <i class="fab fa-github"></i> Code
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI/ML Project: Plant Disease Detector -->
+        <div class="project-card" data-category="aiml" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+          <div class="project-image">
+            <div class="placeholder-image" style="background: linear-gradient(135deg, #1d976c 0%, #93f9b9 100%);">
+              <i class="fas fa-leaf"></i>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Plant Disease Detector</h3>
+            <p class="project-description">
+              Streamlit-based plant disease detection app using Python, NumPy, Pandas, OpenCV, and TensorFlow/Keras for image-based diagnosis.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">Streamlit</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">NumPy</span>
+              <span class="tech-tag">Pandas</span>
+              <span class="tech-tag">TensorFlow</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link" title="View Code">
+                <i class="fab fa-github"></i> Code
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI/ML/Cloud Project: Hospital Management Server -->
+        <div class="project-card" data-category="aiml" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+          <div class="project-image">
+            <div class="placeholder-image" style="background: linear-gradient(135deg, #0b486b 0%, #f56217 100%);">
+              <i class="fas fa-hospital"></i>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Hospital Management Cloud Server</h3>
+            <p class="project-description">
+              Server-based solution for hospital resource management with Python Flask API, PostgreSQL, Docker, and AWS deployment for scalable clinical operations.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">Flask</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Docker</span>
+              <span class="tech-tag">AWS</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link" title="View Code">
+                <i class="fab fa-github"></i> Code
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI/ML/Cloud Project: Kisan AI -->
+        <div class="project-card" data-category="aiml" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
+          <div class="project-image">
+            <div class="placeholder-image" style="background: linear-gradient(135deg, #009fff 0%, #ec2f4b 100%);">
+              <i class="fas fa-tractor"></i>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Kisan AI</h3>
+            <p class="project-description">
+              Precision agriculture model for crop yield prediction and recommendations using Python, pandas, scikit-learn, and cloud-hosted APIs.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Pandas</span>
+              <span class="tech-tag">scikit-learn</span>
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">Azure</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link" title="View Code">
+                <i class="fab fa-github"></i> Code
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fullstack Project: StudySync -->
+        <div class="project-card" data-category="fullstack" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600">
+          <div class="project-image">
+            <div class="placeholder-image" style="background: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%);">
+              <i class="fas fa-school"></i>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">StudySync</h3>
+            <p class="project-description">
+              Educational platform with collaborative notes, scheduling, and content tracking built using HTML, CSS, JavaScript, React, Node.js, and MongoDB.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">HTML</span>
+              <span class="tech-tag">CSS</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">Node.js</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link" title="View Code">
+                <i class="fab fa-github"></i> Code
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fullstack Project: Finance Tracker -->
+        <div class="project-card" data-category="fullstack" data-aos="fade-up" data-aos-duration="800" data-aos-delay="700">
+          <div class="project-image">
+            <div class="placeholder-image" style="background: linear-gradient(135deg, #1d976c 0%, #93f9b9 100%);">
+              <i class="fas fa-wallet"></i>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Finance Tracker</h3>
+            <p class="project-description">
+              Android finance tracker app to log expenses and incomes, built with Java, XML, SQLite, and RESTful backend integration for data persistence.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">Java</span>
+              <span class="tech-tag">XML</span>
+              <span class="tech-tag">SQLite</span>
+              <span class="tech-tag">Firebase Auth</span>
+              <span class="tech-tag">MVVM</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link" title="View Code">
+                <i class="fab fa-github"></i> Code
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frontend Project: Hotaevi Website -->
+        <div class="project-card" data-category="frontend" data-aos="fade-up" data-aos-duration="800" data-aos-delay="800">
+          <div class="project-image">
+            <div class="placeholder-image" style="background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);">
+              <i class="fas fa-home"></i>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Hotaevi Website</h3>
+            <p class="project-description">
+              Responsive frontend site with interactive layout and modern UI components, built using HTML, CSS, JavaScript, and Bootstrap.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">HTML</span>
+              <span class="tech-tag">CSS</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">Bootstrap</span>
+              <span class="tech-tag">jQuery</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link" title="View Code">
+                <i class="fab fa-github"></i> Code
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frontend Project: Trinivial Website -->
+        <div class="project-card" data-category="frontend" data-aos="fade-up" data-aos-duration="800" data-aos-delay="900">
+          <div class="project-image">
+            <div class="placeholder-image" style="background: linear-gradient(135deg, #ff5858 0%, #f09819 100%);">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Trinivial Website</h3>
+            <p class="project-description">
+              Interactive product landing page with animations and responsive design, built with HTML, CSS, JavaScript, and GSAP.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">HTML</span>
+              <span class="tech-tag">CSS</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">GSAP</span>
+              <span class="tech-tag">Responsive</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link" title="View Code">
+                <i class="fab fa-github"></i> Code
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Full Stack Project: SIBAU Sports Website -->
+        <div class="project-card" data-category="fullstack" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+          <div class="project-image">
+            <div class="project-placeholder" style="background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%); height:180px; display:flex; align-items:center; justify-content:center;">
+              <i class="fas fa-trophy" style="font-size:3.5rem; color:rgba(255,255,255,0.9);"></i>
+            </div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">SIBAU Sports Website</h3>
+            <p class="project-description">
+              Official team-based sports portal for Sukkur IBA University — featuring events, schedules, results, and team management with a fully responsive design.
+            </p>
+            <div class="project-tech">
+              <span class="tech-tag">HTML</span>
+              <span class="tech-tag">CSS</span>
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">PHP</span>
+              <span class="tech-tag">MySQL</span>
+              <span class="tech-tag">Responsive</span>
+            </div>
+            <div class="project-links">
+              <a href="https://sports.iba-suk.edu.pk/" target="_blank" rel="noopener noreferrer" class="project-link" title="Live Site">
+                <i class="fas fa-external-link-alt"></i> Live Site
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="section section-dark">
+    <div class="container">
+      <h2 class="section-title">Experience & Education</h2>
+      
+      <div class="experience-content">
+        <div class="experience-column" data-aos="fade-right" data-aos-duration="1000">
+          <h3 class="experience-subtitle">
+            <i class="fas fa-briefcase"></i> Work Experience
+          </h3>
+          
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <h4>Freelance Web Developer</h4>
+                <p class="role">Self-Employed</p>
+                <p class="period">2023 – Present</p>
+                <ul class="achievements">
+                  <li>Developed full-stack web applications (portfolios, educational websites)</li>
+                  <li>Communicated with clients to gather and implement requirements</li>
+                  <li>Managed project timelines and ensured on-time delivery</li>
+                  <li>Built responsive and user-friendly interfaces</li>
+                  <li>Applied modern development practices and automation</li>
+                  <li>Debugged and optimized code</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="timeline-item">
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <h4>Mobile Application Developer</h4>
+                <p class="role">Academic / Personal Experience</p>
+                <p class="period">2023 – Present</p>
+                <ul class="achievements">
+                  <li>Developed a cross-platform restaurant management app</li>
+                  <li>Implemented features like menu, orders, and reservations</li>
+                  <li>Integrated database for real-time data</li>
+                  <li>Focused on UI/UX design and smooth user experience</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <h4>AI & Cloud Engineering Projects</h4>
+                <p class="role">Freelance / Technical Experience</p>
+                <p class="period">2023 – Present</p>
+                <ul class="achievements">
+                  <li>Built machine learning models for prediction tasks</li>
+                  <li>Developed end-to-end ML pipelines</li>
+                  <li>Deployed APIs for real-time predictions</li>
+                  <li>Designed serverless cloud systems using AWS</li>
+                  <li>Implemented scalable and cost-efficient architectures</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <h4>SIBAU Sports Website</h4>
+                <p class="role">Team-Based University Project — Sukkur IBA University</p>
+                <p class="period">2024</p>
+                <ul class="achievements">
+                  <li>Collaborated in a team to design &amp; build the official SIBAU Sports portal</li>
+                  <li>Designed fully responsive UI for sports events, results &amp; schedules</li>
+                  <li>Implemented dynamic content management for multiple sport categories</li>
+                  <li>Ensured cross-browser compatibility and mobile responsiveness</li>
+                  <li>Live: <a href="https://sports.iba-suk.edu.pk/" target="_blank" rel="noopener noreferrer" style="color:var(--primary-color);font-weight:600;">sports.iba-suk.edu.pk ↗</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="experience-column" data-aos="fade-left" data-aos-duration="1000">
+          <h3 class="experience-subtitle">
+            <i class="fas fa-graduation-cap"></i> Education
+          </h3>
+          
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <h4>Bachelor of Science in Computer Science</h4>
+                <p class="role">Sukkur IBA University (SIBAU)</p>
+                <p class="period">2023 - Present (3rd Year)</p>
+                <p>
+                  Currently pursuing BS Computer Science with focus on web & mobile development. Gained hands-on experience in programming, algorithms, and software development.
+                </p>
+              </div>
+            </div>
+            
+            <div class="timeline-item">
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <h4>Professional Certifications</h4>
+                <p class="role">Various Platforms</p>
+                <p class="period">2022 - 2024</p>
+                <ul class="achievements">
+                  <li>PFTP Program: Management & Leadership</li>
+                  <li>Coursera: Python & Generative AI</li>
+                  <li>App & Web Developer Certification</li>
+                  <li>15+ additional technical certifications</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section section-light">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <p class="section-subtitle">I'd love to hear from you! Feel free to reach out for collaborations, project discussions, or just a friendly hello.</p>
+      
+      <div class="contact-content">
+        <div class="contact-info" data-aos="fade-right" data-aos-duration="1000">
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <h4>Location</h4>
+            <p>Sukkur, Sindh, Pakistan</p>
+          </div>
+          
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <h4>Phone</h4>
+            <p><a href="tel:+923254045153">+92 325 4045153</a></p>
+          </div>
+          
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <h4>Email</h4>
+            <p><a href="mailto:shakirhussain.bssef23@ibasuk.edu.pk">shakirhussain.bssef23@ibasuk.edu.pk</a></p>
+          </div>
+          
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-globe"></i>
+            </div>
+            <h4>Social Links</h4>
+            <div class="social-links-contact">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" title="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="https://linkedin.com/in/shakir-hussain" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" title="Twitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" title="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <form class="contact-form" id="contactForm" data-aos="fade-left" data-aos-duration="1000">
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" required placeholder="John Doe">
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com">
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Subject *</label>
+            <input type="text" id="subject" name="subject" required placeholder="Project Inquiry">
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" required placeholder="Tell me about your project..." rows="5"></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary submit-btn">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+          
+          <div class="form-feedback" id="formFeedback"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Shakir Hussain. All rights reserved. | Crafted with <i class="fas fa-heart"></i> using modern web technologies</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" id="scrollToTop">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+</body>
 </html>

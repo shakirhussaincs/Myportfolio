@@ -376,7 +376,7 @@ if (downloadResumeBtn) {
 
     // Create a link element
     const link = document.createElement('a');
-    link.href = 'resume.pdf'; // Update path to your resume PDF
+    link.href = 'cv.pdf'; // Update path to your resume PDF
     link.download = 'Shakir_Hussain_Resume.pdf';
     
     // Append to body, click, and remove
