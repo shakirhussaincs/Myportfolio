@@ -1370,120 +1370,28 @@ a:hover {
     padding: 7rem 1rem 4.5rem;
   }
 
-  .hero-title {
-    font-size: 2.2rem;
-  }
-
-  .section-title {
-    font-size: 2.5rem;
-  }
-
-  .projects-grid {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1rem;
-  }
-
-  .about-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .nav-menu {
-    gap: 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .nav-menu {
-    position: fixed;
-    top: 60px;
-    right: 0;
-    left: 0;
-    background: rgba(15, 23, 42, 0.96);
-    backdrop-filter: blur(12px);
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-    display: none;
-    z-index: 999;
-    box-shadow: var(--shadow-lg);
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  .nav-menu.active {
-    display: flex;
-  }
-
-  .nav-toggle {
-    display: flex;
-  }
-
-  /* Hide floating badges on small screens to avoid overflow */
-  .floating-badge {
-    display: none;
-  }
-
-  .hero-content {
-    grid-template-columns: 1fr;
-  }
-
-  .project-card,
-  .skill-category,
-  .timeline-content,
-  .contact-card {
-    border-radius: 16px;
-  }
-
-  .section-title {
-    font-size: 2rem;
-  }
-
-  .section-subtitle {
-    margin-bottom: 1rem;
-  }
-}
-
-@media (max-width: 540px) {
-  .hero-title {
-    font-size: 1.75rem;
-  }
-
-  .hero-subtitle,
-  .project-description,
-  .about-text p,
-  .timeline-content p {
-    font-size: 0.95rem;
-  }
-
-  .hero-image {
-    height: 300px;
-  }
-
-  .profile-container {
-    width: 280px;
-    height: 280px;
-  }
-
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-/* ============================================
-   14. RESPONSIVE DESIGN (Consolidated & Optimized)
+   14. UNIFIED RESPONSIVE DESIGN
    ============================================ */
 
+/* Large Tablets & Small Laptops (992px and down) */
 @media (max-width: 992px) {
-  .hero-content, .about-content, .experience-content {
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: var(--spacing-xl);
+  }
+
+  .about-content, .experience-content {
     grid-template-columns: 1fr;
     text-align: center;
   }
-  
+
   .about-highlights {
     grid-template-columns: 1fr 1fr;
   }
 }
 
+/* Tablets (768px and down) */
 @media (max-width: 768px) {
   .nav-menu {
     display: none;
@@ -1494,22 +1402,22 @@ a:hover {
     flex-direction: column;
     background: rgba(15, 23, 42, 0.98);
     backdrop-filter: blur(15px);
-    box-shadow: var(--shadow-lg);
     padding: var(--spacing-lg);
     gap: var(--spacing-md);
     border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
   }
-  
+
   .nav-menu.active {
     display: flex;
   }
-  
+
   .nav-toggle {
     display: flex;
   }
 
-  .hero-title {
-    font-size: var(--font-size-4xl);
+  .section-title {
+    font-size: var(--font-size-3xl);
   }
 
   .profile-container {
@@ -1518,19 +1426,15 @@ a:hover {
     margin: 0 auto;
   }
 
-  /* Hide decorative floating shapes to save mobile performance */
-  .floating-badge {
-    display: none;
+  .hero-title {
+    font-size: var(--font-size-4xl);
   }
 }
 
-@media (max-width: 540px) {
+/* Mobile Devices (576px and down) */
+@media (max-width: 576px) {
   .section {
     padding: var(--spacing-xl) 0;
-  }
-
-  .section-title {
-    font-size: var(--font-size-3xl);
   }
 
   .about-highlights {
@@ -1539,11 +1443,15 @@ a:hover {
 
   .projects-filter {
     gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    justify-content: flex-start;
   }
 
   .filter-btn {
-    font-size: 0.8rem;
+    white-space: nowrap;
     padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
   }
 
   .hero-cta {
@@ -1554,17 +1462,21 @@ a:hover {
   .hero-cta .btn {
     width: 100%;
   }
+
+  .profile-container {
+    width: 220px;
+    height: 220px;
+  }
+
+  .hero-title {
+    font-size: 2.25rem;
+  }
 }
 
 /* Print Styles */
 @media print {
-  .navbar,
-  .scroll-to-top,
-  .footer {
+  .navbar, .scroll-to-top, .footer, #bg-canvas {
     display: none;
   }
-  
-  body {
-    background: white;
-  }
+  body { background: white; color: black; }
 }
