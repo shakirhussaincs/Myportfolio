@@ -82,6 +82,16 @@ body {
   pointer-events: none;
 }
 
+/* Background Vignette & Glow Overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 0%, rgba(15, 23, 42, 0.4) 100%);
+  pointer-events: none;
+  z-index: -1;
+}
+
 /* ============================================
    2. UTILITY CLASSES
    ============================================ */

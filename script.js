@@ -17,7 +17,7 @@ const initThreeJS = () => {
   const scene = new THREE.Scene();
   
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.z = 30;
+  camera.position.z = 35;
 
   const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
@@ -28,53 +28,84 @@ const initThreeJS = () => {
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
 
-  // Add Particles
+  // --- 1. NEURAL STARFIELD ---
   const particlesGeometry = new THREE.BufferGeometry();
-  const particlesCount = 1500;
+  const particlesCount = 2000;
   const posArray = new Float32Array(particlesCount * 3);
 
   for(let i = 0; i < particlesCount * 3; i++) {
-    posArray[i] = (Math.random() - 0.5) * 100;
+    posArray[i] = (Math.random() - 0.5) * 120;
   }
 
   particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
   
   const particlesMaterial = new THREE.PointsMaterial({
-    size: 0.15,
+    size: 0.12,
     color: 0x6366f1,
     transparent: true,
-    opacity: 0.8,
+    opacity: 0.6,
     blending: THREE.AdditiveBlending
   });
 
   const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
   scene.add(particlesMesh);
 
-  // Add some floating geometric shapes
-  const shapes = [];
-  const geometry = new THREE.IcosahedronGeometry(1, 0);
-  const material = new THREE.MeshBasicMaterial({ 
-    color: 0xec4899, 
+  // --- 2. THE TECH CORE (Central Centerpiece) ---
+  const coreGroup = new THREE.Group();
+  scene.add(coreGroup);
+
+  // Outer Wireframe Sphere
+  const outerGeo = new THREE.SphereGeometry(15, 32, 32);
+  const outerMat = new THREE.MeshBasicMaterial({
+    color: 0x6366f1,
     wireframe: true,
     transparent: true,
-    opacity: 0.3
+    opacity: 0.1
   });
+  const outerSphere = new THREE.Mesh(outerGeo, outerMat);
+  coreGroup.add(outerSphere);
 
-  for(let i = 0; i < 15; i++) {
+  // Inner Icosahedron (The "Engine")
+  const innerGeo = new THREE.IcosahedronGeometry(8, 1);
+  const innerMat = new THREE.MeshBasicMaterial({
+    color: 0xec4899,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.25
+  });
+  const innerMesh = new THREE.Mesh(innerGeo, innerMat);
+  coreGroup.add(innerMesh);
+
+  // --- 3. FLOATING GEOMETRY ---
+  const shapes = [];
+  const floatersCount = 25;
+  
+  for(let i = 0; i < floatersCount; i++) {
+    const size = Math.random() * 0.8 + 0.2;
+    const geometry = Math.random() > 0.5 
+      ? new THREE.IcosahedronGeometry(size, 0) 
+      : new THREE.OctahedronGeometry(size, 0);
+      
+    const material = new THREE.MeshBasicMaterial({ 
+      color: Math.random() > 0.5 ? 0x6366f1 : 0xec4899, 
+      wireframe: true,
+      transparent: true,
+      opacity: 0.2
+    });
+
     const mesh = new THREE.Mesh(geometry, material);
-    mesh.position.x = (Math.random() - 0.5) * 60;
-    mesh.position.y = (Math.random() - 0.5) * 60;
-    mesh.position.z = (Math.random() - 0.5) * 30 - 10;
-    mesh.rotation.x = Math.random() * Math.PI;
-    mesh.rotation.y = Math.random() * Math.PI;
+    mesh.position.set(
+      (Math.random() - 0.5) * 80,
+      (Math.random() - 0.5) * 80,
+      (Math.random() - 0.5) * 40 - 10
+    );
     
-    // Custom properties for animation
     mesh.userData = {
-      rx: (Math.random() - 0.5) * 0.02,
-      ry: (Math.random() - 0.5) * 0.02,
-      yPosStart: mesh.position.y,
-      speed: Math.random() * 0.02 + 0.01,
-      offset: Math.random() * Math.PI * 2
+      rotX: (Math.random() - 0.5) * 0.015,
+      rotY: (Math.random() - 0.5) * 0.015,
+      posY: mesh.position.y,
+      speed: Math.random() * 0.01 + 0.005,
+      offset: Math.random() * 10
     };
     
     shapes.push(mesh);
@@ -88,17 +119,12 @@ const initThreeJS = () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  // Handle Mouse Movement for Parallax
+  // Handle Mouse Movement for Advanced Parallax
   let mouseX = 0;
   let mouseY = 0;
-  let targetX = 0;
-  let targetY = 0;
-  const windowHalfX = window.innerWidth / 2;
-  const windowHalfY = window.innerHeight / 2;
-
-  document.addEventListener('mousemove', (event) => {
-    mouseX = (event.clientX - windowHalfX);
-    mouseY = (event.clientY - windowHalfY);
+  document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX - window.innerWidth / 2) / 100;
+    mouseY = (e.clientY - window.innerHeight / 2) / 100;
   });
 
   // Animation Loop
@@ -106,24 +132,27 @@ const initThreeJS = () => {
 
   const animate = () => {
     requestAnimationFrame(animate);
-    const elapsedTime = clock.getElapsedTime();
+    const time = clock.getElapsedTime();
 
-    targetX = mouseX * 0.001;
-    targetY = mouseY * 0.001;
+    // Subtle Core Rotations
+    outerSphere.rotation.y += 0.002;
+    outerSphere.rotation.z += 0.001;
+    innerMesh.rotation.y -= 0.005;
+    innerMesh.rotation.x += 0.003;
 
-    // Rotate particle system slowly
-    particlesMesh.rotation.y += 0.001;
-    particlesMesh.rotation.x += 0.0005;
+    // Follow Mouse with smoothing
+    coreGroup.rotation.x += (mouseY * 0.05 - coreGroup.rotation.x) * 0.05;
+    coreGroup.rotation.y += (mouseX * 0.05 - coreGroup.rotation.y) * 0.05;
 
-    // Parallax effect on particles
-    particlesMesh.rotation.y += 0.05 * (targetX - particlesMesh.rotation.y);
-    particlesMesh.rotation.x += 0.05 * (targetY - particlesMesh.rotation.x);
+    particlesMesh.rotation.y += 0.0005;
+    particlesMesh.position.x += (mouseX * 0.2 - particlesMesh.position.x) * 0.05;
+    particlesMesh.position.y += (-mouseY * 0.2 - particlesMesh.position.y) * 0.05;
 
-    // Animate shapes
-    shapes.forEach((shape) => {
-      shape.rotation.x += shape.userData.rx;
-      shape.rotation.y += shape.userData.ry;
-      shape.position.y = shape.userData.yPosStart + Math.sin(elapsedTime * shape.userData.speed + shape.userData.offset) * 2;
+    // Animate Floaties
+    shapes.forEach((s) => {
+      s.rotation.x += s.userData.rotX;
+      s.rotation.y += s.userData.rotY;
+      s.position.y = s.userData.posY + Math.sin(time * s.userData.speed + s.userData.offset) * 3;
     });
 
     renderer.render(scene, camera);
