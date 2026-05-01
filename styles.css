@@ -427,6 +427,24 @@ a:hover {
   position: relative;
   width: 320px;
   height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The Light Black Background Plate */
+.profile-container::before {
+  content: '';
+  position: absolute;
+  width: 110%;
+  height: 110%;
+  background: rgba(15, 23, 42, 0.6); /* Light black / charcoal */
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  transform: rotate(-5deg);
+  z-index: 1;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .profile-image {
@@ -438,6 +456,13 @@ a:hover {
   box-shadow: var(--shadow-2xl);
   position: relative;
   z-index: 2;
+  border: 2px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.5s ease;
+}
+
+.profile-container:hover .profile-image {
+  transform: scale(1.05) translateY(-5px);
+}
 }
 
 .profile-fallback {
