@@ -208,11 +208,6 @@ navLinks.forEach(link => {
   });
 });
 
-// Active Navigation Link on Scroll
-window.addEventListener('scroll', () => {
-  updateActiveNavLink();
-});
-
 function updateActiveNavLink() {
   const sections = document.querySelectorAll('section');
   const scrollPosition = window.scrollY + 100;
@@ -237,12 +232,19 @@ function updateActiveNavLink() {
 // 4. SCROLL TO TOP BUTTON
 // ============================================
 
+// Single rAF-throttled scroll handler drives both the active nav link
+// and the scroll-to-top button, instead of two separate listeners.
+let scrollTicking = false;
+
 window.addEventListener('scroll', () => {
-  if (window.pageYOffset > 300) {
-    scrollToTopBtn.classList.add('visible');
-  } else {
-    scrollToTopBtn.classList.remove('visible');
-  }
+  if (scrollTicking) return;
+  scrollTicking = true;
+
+  requestAnimationFrame(() => {
+    updateActiveNavLink();
+    scrollToTopBtn.classList.toggle('visible', window.pageYOffset > 300);
+    scrollTicking = false;
+  });
 });
 
 scrollToTopBtn.addEventListener('click', (e) => {
@@ -427,60 +429,7 @@ if (typeof AOS !== 'undefined') {
 }
 
 // ============================================
-// 10. PERFORMANCE OPTIMIZATION
-// ============================================
-
-// Lazy Load Images
-const images = document.querySelectorAll('img[data-src]');
-
-if ('IntersectionObserver' in window) {
-  const imageObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const img = entry.target;
-        img.src = img.dataset.src;
-        img.removeAttribute('data-src');
-        imageObserver.unobserve(img);
-      }
-    });
-  });
-
-  images.forEach(img => imageObserver.observe(img));
-}
-
-// ============================================
-// 11. DEBOUNCE FUNCTION (for performance)
-// ============================================
-
-function debounce(func, delay) {
-  let timeoutId;
-  return function (...args) {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func.apply(this, args), delay);
-  };
-}
-
-// ============================================
-// 12. INTERSECTION OBSERVER FOR ANIMATIONS
-// ============================================
-// (Removed manual observer in favor of AOS for smoother animations)
-
-// ============================================
-// 13. FLOATING BADGES ANIMATION
-// ============================================
-
-function animateFloatingBadges() {
-  const badges = document.querySelectorAll('.floating-badge');
-  badges.forEach((badge, index) => {
-    badge.style.animation = `float 3s ease-in-out infinite ${index}s`;
-  });
-}
-
-// Call on page load
-document.addEventListener('DOMContentLoaded', animateFloatingBadges);
-
-// ============================================
-// 14. DYNAMIC YEAR IN FOOTER
+// 10. DYNAMIC YEAR IN FOOTER
 // ============================================
 
 const footerYear = document.querySelector('.footer p');
@@ -490,57 +439,7 @@ if (footerYear) {
 }
 
 // ============================================
-// 15. COPY EMAIL TO CLIPBOARD
-// ============================================
-
-function copyToClipboard(text) {
-  navigator.clipboard.writeText(text).then(() => {
-    showNotification('Copied to clipboard!', 'success');
-  }).catch(err => {
-    console.error('Failed to copy:', err);
-  });
-}
-
-// ============================================
-// 16. NOTIFICATION SYSTEM
-// ============================================
-
-function showNotification(message, type = 'info') {
-  const notification = document.createElement('div');
-  notification.className = `notification notification-${type}`;
-  notification.textContent = message;
-  notification.style.cssText = `
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 1rem 1.5rem;
-    background: ${type === 'success' ? '#4CAF50' : '#f44336'};
-    color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: 9999;
-    animation: slideInRight 300ms ease;
-  `;
-
-  document.body.appendChild(notification);
-
-  setTimeout(() => {
-    notification.style.animation = 'slideOutRight 300ms ease';
-    setTimeout(() => notification.remove(), 300);
-  }, 3000);
-}
-
-// ============================================
-// 17. CURSOR EFFECTS (Optional Enhancement)
-// ============================================
-
-document.addEventListener('mousemove', (e) => {
-  // Could add custom cursor effects here
-  // Currently disabled for performance
-});
-
-// ============================================
-// 18. KEYBOARD NAVIGATION
+// 11. KEYBOARD NAVIGATION
 // ============================================
 
 document.addEventListener('keydown', (e) => {
@@ -600,48 +499,7 @@ function validateInput(input) {
 }
 
 // ============================================
-// 21. PROGRESSIVE WEB APP SUPPORT
-// ============================================
-
-if ('serviceWorker' in navigator) {
-  // Uncomment to enable service worker
-  // navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration failed'));
-}
-
-// ============================================
-// 22. LOCAL STORAGE UTILITIES
-// ============================================
-
-const StorageManager = {
-  setItem: (key, value) => {
-    try {
-      localStorage.setItem(key, JSON.stringify(value));
-    } catch (e) {
-      console.error('Storage error:', e);
-    }
-  },
-
-  getItem: (key) => {
-    try {
-      const item = localStorage.getItem(key);
-      return item ? JSON.parse(item) : null;
-    } catch (e) {
-      console.error('Storage error:', e);
-      return null;
-    }
-  },
-
-  removeItem: (key) => {
-    try {
-      localStorage.removeItem(key);
-    } catch (e) {
-      console.error('Storage error:', e);
-    }
-  }
-};
-
-// ============================================
-// 23. SMOOTH PAGE TRANSITIONS
+// 12. SMOOTH PAGE TRANSITIONS
 // ============================================
 
 window.addEventListener('beforeunload', () => {
@@ -649,7 +507,7 @@ window.addEventListener('beforeunload', () => {
 });
 
 // ============================================
-// 24. LOG INITIALIZATION
+// 13. LOG INITIALIZATION
 // ============================================
 
 console.log('%cWelcome to Shakir Hussain Portfolio! 👋', 'color: #6366f1; font-size: 16px; font-weight: bold;');
@@ -657,7 +515,7 @@ console.log('%cFor inquiries, contact: shakirhussain.bssef23@ibasuk.edu.pk', 'co
 console.log('%cPhone: +92 325 4045153', 'color: #06b6d4; font-size: 14px;');
 
 // ============================================
-// 25. ACCESSIBILITY
+// 14. ACCESSIBILITY
 // ============================================
 
 // Focus visible for keyboard navigation
@@ -670,15 +528,12 @@ document.addEventListener('mousedown', () => {
 });
 
 // ============================================
-// 26. INITIALIZATION ON LOAD
+// 15. INITIALIZATION ON LOAD
 // ============================================
 
 window.addEventListener('load', () => {
   // Update active nav on initial load
   updateActiveNavLink();
-
-  // Initialize animations
-  animateFloatingBadges();
 
   // Fade in hero content
   const heroContent = document.querySelector('.hero-content');
@@ -691,52 +546,6 @@ window.addEventListener('load', () => {
     AOS.refresh();
   }
 });
-
-// ============================================
-// 27. DARK MODE TOGGLE (Optional)
-// ============================================
-
-// Uncomment this section if you want to add dark mode toggle
-
-/*
-const darkModeToggle = document.createElement('button');
-darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-darkModeToggle.className = 'dark-mode-toggle';
-darkModeToggle.style.cssText = `
-  position: fixed;
-  bottom: 100px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: white;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-lg);
-  transition: all 300ms ease;
-`;
-
-document.body.appendChild(darkModeToggle);
-
-let darkMode = StorageManager.getItem('darkMode') || false;
-
-darkModeToggle.addEventListener('click', () => {
-  darkMode = !darkMode;
-  document.body.classList.toggle('dark-mode', darkMode);
-  StorageManager.setItem('darkMode', darkMode);
-  darkModeToggle.innerHTML = darkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-});
-
-if (darkMode) {
-  document.body.classList.add('dark-mode');
-  darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-}
-*/
 
 // ============================================
 // END OF SCRIPT
